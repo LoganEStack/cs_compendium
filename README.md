@@ -63,9 +63,7 @@ This document is not finished and is actively being worked on. Structure and wor
 -   **Circular (Singly/Doubly) Linked List:** A Linked List where the last node points to the first. Only modification is that the last node points to the first.
 	-   **Advantages:** The entire list can be traversed starting from any node and there are fewer edge cases as all nodes have a before and after node.
 <p align="center">
-  <img src="images/.png">
-  <br/>
-  <i><a href=http://robertgreiner.com/2014/08/cap-theorem-revisited>Source: </a></i>
+  <img src="images/table_linked_list_vs_array.png">
 </p>
 
 [**Stack:**](https://www.geeksforgeeks.org/stack-data-structure/) Data goes First In Last Out. Common for any problems involving backtracking. Typical functions include peek, push, and pop.
@@ -128,9 +126,9 @@ This document is not finished and is actively being worked on. Structure and wor
 	-   The root has at least two children if it is not a leaf.
 
 <p align="center">
-  <img src="images/.png">
+  <img src="images/b-tree.png">
   <br/>
-  <i><a href=http://robertgreiner.com/2014/08/cap-theorem-revisited>Source: </a></i>
+  <i><a href=https://www.cs.cornell.edu/courses/cs3110/2012sp/recitations/rec25-B-trees/rec25.html>Source: B-Trees, Cornell</a></i>
 </p>
 
 -   [**Tries:**](https://www.geeksforgeeks.org/advantages-trie-data-structure/) Used to store strings that can be visualized like a graph. Each node added waists a lot of storage on empty nodes, but means less overhead in the future. Tries are rarely used outside of spell checkers and autocomplete. You can also use them to print all words in alphabetical order. Keep Tries in mind if a problem involves large searches based on letters in a word. A trie consists of an empty root node, with one child node for each letter of the alphabet it represents (Each one starts out null). Each child can have children of its own that begin to represent words. 
@@ -138,9 +136,9 @@ This document is not finished and is actively being worked on. Structure and wor
 	> [https://medium.com/basecs/trying-to-understand-tries-3ec6bede0014](https://medium.com/basecs/trying-to-understand-tries-3ec6bede0014)
 
 <p align="center">
-  <img src="images/.png">
+  <img width="400" src="images/tries.jpg">
   <br/>
-  <i><a href=https://medium.com/basecs/trying-to-understand-tries-3ec6bede0014>Source: Trying to Understand Tries</a></i>
+  <i><a href=https://medium.com/basecs/trying-to-understand-tries-3ec6bede0014>Source: Trying to Understand Tries, Medium</a></i>
 </p>
 
 -   [**Heap:**](https://www.geeksforgeeks.org/heap-data-structure/?ref=shm) A complete Binary Tree (all the levels are completely filled except possibly the lowest one, which is filled from the left.)
@@ -152,7 +150,7 @@ This document is not finished and is actively being worked on. Structure and wor
 [Graph:](https://www.geeksforgeeks.org/graph-data-structure-and-algorithms)  Non-linear data structure consisting of vertices (nodes) and edges. It’s like a tree that doesn’t have to flow down, where each node can connect to any other node. Often, this results in cycles in the graph. A graph can also be directed, where the lines have arrows indicating some kind of order for the nodes. More on graphs in the “Algorithms” section.
 
 <p align="center">
-  <img src="images/.png">
+  <img width="600" src="images/table_common_data_structure_operations.png">
   <br/>
   <i><a href=https://www.bigocheatsheet.com/>Source: Big-O Cheat Sheet</a></i>
 </p>
@@ -402,9 +400,9 @@ We sort all jobs from greatest to least profit. Then we try to match each job st
 
 [**Kruskal's Minimum Spanning Tree:**](https://www.geeksforgeeks.org/kruskals-minimum-spanning-tree-algorithm-greedy-algo-2/) Firstly, a minimum spanning tree (MST) is a subset of the edges of a connected, edge-weighted, undirected graph that connects all the vertices together, without any cycles and with the minimum possible total edge weight. That is, it is a spanning tree whose sum of edge weights is as small as possible. Notice below that each node is visited and that there are no cycles. The min sum is 38.
 <p align="center">
-  <img src="images/.png">
+  <img src="images/mst.png">
   <br/>
-  <i><a href=http://robertgreiner.com/2014/08/cap-theorem-revisited>Source: </a></i>
+  <i><a href=https://en.wikipedia.org/wiki/Minimum_spanning_tree>Source: Wikipedia</a></i>
 </p>
 This is different from Dijkstra’s Shortest Path, which builds a Shortest Path Tree. MST aims for the lowest overall score, while SPT aims for the lowest individual node score. The length of a path between any two nodes in an MST may not be the shortest path between those two nodes in the original graph, but will contribute to the lowest overall score. Likewise, the shortest path between two nodes as represented in an SPT may result in a much larger overall score. MST is useful for overall network planning such as building a road system efficiently. PST is useful for individual planning such as if you want all roads to lead to one place efficiently.
 
@@ -558,9 +556,9 @@ If none of these work, we look at comparative sorts. Firstly, we ask: is the amo
 [**External Sorting:**](https://www.geeksforgeeks.org/sorting-larger-file-with-smaller-ram/#) Sorting data that’s too big for memory. First, we divide our source file into temporary files of size equal to the size of the RAM. Then, sort the individual files. Next, create a new file. Compare the first element in each sub-file, and put the smallest one into the new file, then move onto the next element in that sub-file. Continue iterating over each subfile, taking the smallest available element, until all files have been read into the new, sorted file.
 
 <p align="center">
-  <img src="images/.png">
+  <img src="images/array_sorting_algorithms.png">
   <br/>
-  <i><a href=http://robertgreiner.com/2014/08/cap-theorem-revisited>Source: </a></i>
+  <i><a href=https://www.bigocheatsheet.com>Source: Big-O Cheat Sheet</a></i>
 </p>
 
 <p align="right">(<a href="#table-of-contents">back to top</a>)</p>
@@ -604,9 +602,7 @@ If none of these work, we look at comparative sorts. Firstly, we ask: is the amo
 	-   There is one copy of the variable, constant, or method that belongs to the class as a whole, and not to a particular instance. Changes in one instance of a class will affect the value in all instances. Static methods are required to be called through the class itself rather than an instantiation, and often provide some sort of class-related utility. Static methods cannot reference any instance variables inside them, since they have to operate the same across all instances, and the variables can be different.
 
 <p align="center">
-  <img src="images/.png">
-  <br/>
-  <i><a href=http://robertgreiner.com/2014/08/cap-theorem-revisited>Source: </a></i>
+  <img src="images/static.png">
 </p>
 
 **Abstraction:** A placeholder for a method or class that will be fully defined in a descendent class. Abstract classes and methods are completely blank.
@@ -632,20 +628,35 @@ The Has-A relationship or Association can be divided into aggregation and compos
 	-   Accomplished by declaring an object instance in another object as final
 
 <p align="center">
-  <img src="images/.png">
+  <img src="images/composition.png">
   <br/>
-  <i><a href=http://robertgreiner.com/2014/08/cap-theorem-revisited>Source: </a></i>
+  <i><a href=https://www.geeksforgeeks.org/composition-in-java>Source: Composition in Java, Geeks for Geeks</a></i>
 </p>
 
 **Delegation:** An alternative to inheritance, delegation means handing over the responsibility for a particular task to another class or method. (i.e. use an object of another class as an instance variable, and forward messages to the instance.)
 -   When you want to "copy"/Expose the base class' API, you use inheritance. When you only want to "copy" functionality, use delegation.
 -   One example of this: You want to create a Stack out of a List. Stack only has pop, push and peek. You shouldn't use inheritance given that you don't want push_back, push_front, removeAt, etc. in a Stack.
 
-<p align="center">
-  <img src="images/.png">
-  <br/>
-  <i><a href=http://robertgreiner.com/2014/08/cap-theorem-revisited>Source: </a></i>
-</p>
+```
+class RealPrinter {
+    // the "delegate"
+    void print()
+    {
+        System.out.println("The Delegate");
+    }
+}
+ 
+class Printer {
+    // the "delegator"
+    RealPrinter p = new RealPrinter();
+ 
+    // create the delegate
+    void print()
+    {
+        p.print(); // delegation
+    }
+}
+```
 
 **Dispatch:** The way a language links calls to function/method definitions.
 -   **Static dispatch:** how the language handles overloading
@@ -821,9 +832,9 @@ How to approach a system design interview question:
 -   Latency numbers every programmer should know:
 
 <p align="center">
-  <img src="images/.png">
+  <img width="600" src="images/latency_numbers.png">
   <br/>
-  <i><a href=http://robertgreiner.com/2014/08/cap-theorem-revisited>Source: </a></i>
+  <i><a href=http://highscalability.com/blog/2011/1/26/google-pro-tip-use-back-of-the-envelope-calculations-to-choo.html>Source: Back-Of-The-Envelope Calculations, High Scalability</a></i>
 </p>
 
 Some things to notice:
@@ -1158,19 +1169,22 @@ if __name__ ==  '__main__':
 -   **Heap:** Allocation happens during execution of instructions. It has nothing to do with the heap data structure. Objects are stored in Heap-space, while the references to said objects are located in Stack-memory. The same goes for strings, which are stored in a “string pool” in a Heap. Heap data is visible to all running threads. If this memory is not handled well, it can lead to a memory leak. Allocation and de-allocation are done manually by the programmer (or by garbage collection in Java).
 
 <p align="center">
-  <img src="images/.png">
+  <img width="700" src="images/Java-Heap-Stack-Memory.png">
   <br/>
-  <i><a href=http://robertgreiner.com/2014/08/cap-theorem-revisited>Source: </a></i>
+  <i><a href=http://robertgreiner.com/2014/08/cap-theorem-revisited>Source: Java Heap Space vs Stack, Digital Ocean</a></i>
 </p>
 
 **Compilers vs Interpreters:** Compilers load an entire file and turn it into machine code. Interpreters go line by line, translating on the fly. Compilers are faster than interpreters but need specific information about the CPU they’re running on. Interpreters are slower but don’t need any info about the machine.
 
 **Bit Manipulation:**
-<p align="center">
-  <img src="images/.png">
-  <br/>
-  <i><a href=http://robertgreiner.com/2014/08/cap-theorem-revisited>Source: </a></i>
-</p>
+| Character  | Example | Name                       |
+| ---------- |:-------:| :------------------------: |
+| &          | a & b   | Bitwise AND                |
+| \|         | a \| b  | Bitwise OR                 |
+| ^          | a ^ b   | Bitwise XOR (exclusive OR) |
+| ~          | ~a      | Bitwise NOT                |
+| <<         | a << n  | Bitwise left shift         |
+| >>         | a >> n  | Bitwise right shift        |
 
 <p align="right">(<a href="#table-of-contents">back to top</a>)</p>
 
