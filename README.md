@@ -805,7 +805,7 @@ How to approach a system design interview question:
     
 -   Step 2: Create a high level design
 
--   	Outline a high level design with all important components.
+    -   Outline a high level design with all important components.
     
 		-   Sketch the main components and connections
 		    
