@@ -30,15 +30,17 @@
 	<li><a href="#multithreading">Multithreading</a></li>
 	<li><a href="#database-design">Database Design</a></li>
 	<li><a href="#system-design">System Design</a></li>
+	<li><a href="#design-patterns">Design Patterns</a></li>
 	<li><a href="#web-design">Web Design</a></li>
 	<li><a href="#concepts">Concepts</a></li>
+	<li><a href="#interview-methodology">Interview Methodology</a></li>
 </ol>
   
 # ABOUT THE PROJECT
 
-Technical interviews suck. When I started my preparations for them, I was immediately overwhelmed by the sheer breadth of information that a software engineer is required to know just to be considered employable. I started documenting everything I was relearning as a quick reference guide. Based on my observations, this is a general coverage of topics that one might reasonably expect to encounter in an interview. Please note that this is geared towards a mid-level software engineer. Less will be expected of junior devs and more will be expected of senior devs. Study accordingly.
+Technical interviews suck. When I started my preparations for them, I was immediately overwhelmed by the sheer breadth of information that a software engineer is required to know just to be considered employable. I started documenting everything I was learning and relearning as a quick reference guide. Based on my observations, this is a general coverage of topics that one might reasonably expect to encounter in an interview. Please note that this is geared towards a mid-level software engineer. Less will be expected of junior devs and more will be expected of senior devs. Study accordingly.
 
-Much of what is written here is content from across the web. There are many areas that are my own summary of readings simplified to the most layman terms, but ultimately this is more of a compilation of others' writings. I've done my best to retroactively link to sources both for credit and further reading, but this is really just a document for myself and I don't wish to advertise it as anything more. However, if you the reader happen to stumble across this document and find it useful in any way, then my decision to share it publicly will be validated. I'm no authority; I encourage you to research everything here for yourself. If I got something wrong, tell me about it or submit a pull request. Do the same if you'd like to add more information or clear up some wording. Just remember to keep things simple and brief.
+Much of what is written here is content from across the web. There are many areas that are my own summaries of readings simplified to the most layman terms, but ultimately this is more of a compilation of others' writings. I've done my best to retroactively link to sources both for credit and further reading, but this is really just a document for myself and I don't wish to advertise it as anything more. I'm no authority; I encourage you to research everything here for yourself. If I got something wrong, tell me about it or submit a pull request. Do the same if you'd like to add more information or clear up some wording. Just remember to keep things simple and brief.
 
 This document is not finished and is actively being worked on. Structure and wording throughout can be expected to change over time. Cheers.
 
@@ -47,17 +49,18 @@ This document is not finished and is actively being worked on. Structure and wor
 
 # DATA STRUCTURES
 
-> Know the concepts,  how to code, how to mutate, and where to use what (performance).
+> Know the concepts, how to code, how to mutate, and where to use what (performance).
 
 > **[https://www.geeksforgeeks.org/data-structures/](https://www.geeksforgeeks.org/data-structures/)**
 
-[**Array:**](https://www.geeksforgeeks.org/array-data-structure/?ref=shm)  Basic means of storing data that can be accessed by index.
+[**Array:**](https://www.geeksforgeeks.org/array-data-structure/?ref=shm) Basic means of storing data that can be accessed by index.
 
 -   **Advantages:** Random access, cache locality (all elements are stored next to each other in memory, local to one another. This means when a chunk is brought into a cache, there’s a good chance the cache will hit the needed value, saving cpu time)
 -   **Disadvantages:** Can’t change the size after declared (this can be remedied by using lists), slow to insert and remove when not at the end of an array.
 
-[**Linked List:**](https://www.geeksforgeeks.org/data-structures/linked-list/?ref=lbp)  A data structure that allows you to take your values and chain them together by having the memory location of one value point to the memory location of the next. Linked Lists can further be used for less abstract data structures such as stacks and queues. Generally, linked lists are used when you need a lot of ordered insertions or deletions in the middle of your data structure. Typical functions  include search, insert, and remove.
--   **Advantages:** Not needing to know the size of the linked list prior to its declaration, and better performance for insertion and deletion
+
+[**Linked List:**](https://www.geeksforgeeks.org/data-structures/linked-list/?ref=lbp)  A data structure that allows you to take your values and chain them together by having the memory location of one value point to the memory location of the next. Linked Lists can further be used for less abstract data structures such as stacks and queues. Generally, linked lists are used when you need a lot of ordered insertions or deletions in the middle of your data structure. Typical functions include search, insert, and remove. Avoid the edge case of adding a node to an empty list by using a dummy node (a throw-away node that points to the head).
+-   **Advantages:** Not needing to know the size of the linked list prior to its declaration, and better performance for insertion and deletion.
 -   **Disadvantages:** No random access (have to access elements sequentially by traversing the entire list), extra memory space is required for each element’s pointer, not cache friendly (the pointers can be anywhere in memory)... Basically any interaction with a linked list involves traversing the entire list until the element in question is found. It’s great for when a lot of changes need to be made but not great when you need to read from the data frequently.
 -   **Doubly Linked List:** Can move or traverse the linked list in both directions. Only modification is that Node also contains a prev attribute.
 -   **Circular (Singly/Doubly) Linked List:** A Linked List where the last node points to the first. Only modification is that the last node points to the first.
@@ -67,10 +70,12 @@ This document is not finished and is actively being worked on. Structure and wor
 </p>
 
 [**Stack:**](https://www.geeksforgeeks.org/stack-data-structure/) Data goes First In Last Out. Common for any problems involving backtracking. Typical functions include peek, push, and pop.
+-   **Monotonic stack:** Keeps elements in increasing or decreasing order by permanently popping off stored elements until the new element can be placed. A decreasing stack will find the next largest, and vice versa.
 
 [**Queue:**](https://www.geeksforgeeks.org/queue-data-structure/)  Data goes First In First Out. Typical functions include peek, enqueue, and dequeue.
 -   **Deque:** A queue that allows for enqueue and dequeue from either end.
- -   [**Priority Queue:**](https://www.geeksforgeeks.org/priority-queue-set-1-introduction/) Inserts elements into a queue at different positions based on priority values. Only relies on order of insertion when two elements share the same priority. Typically implemented using a heap.
+-   [**Priority Queue:**](https://www.geeksforgeeks.org/priority-queue-set-1-introduction/) Inserts elements into a queue at different positions based on priority values. Only relies on order of insertion when two elements share the same priority. Typically implemented using a heap.
+-   **Monotonic Queue or Deque:** Used in sliding window problems when you’re required to maintain some property (like the minimum, maximum, or sum) over a sliding window of fixed size across an array. Think of these if you need to keep track of the max or min in a range.
 
 **Hash Table:** A hash table is a higher order data structure that revolves around the concept of a value and its associated key that are stored and retrieved using a concept known as hashing. Your key will be hashed (put through some algorithm) which will produce an index. Your value will then be placed in that index. If two keys are hashed and produce the same index, there’s a collision. This can be remedied with either Seperate Chaining (each index’s value is a linked list of all values under it) or Open Addressing (keep probing the later indexes by some means until you find an open one).
 
@@ -97,7 +102,7 @@ This document is not finished and is actively being worked on. Structure and wor
 	-   Post-Order (LRX)
 	-   Level Order: Visit all nodes left to right, level by level
 
--   [**Binary Tree:**](https://www.geeksforgeeks.org/binary-tree-data-structure/?ref=lbp)  A structure where each node has at most 2 children. Typical functions include insert, remove, search, and traverse. Auxiliary operations include find height of tree, find level of a node, find size of entire tree.
+-   [**Binary Tree:**](https://www.geeksforgeeks.org/binary-tree-data-structure/?ref=lbp)  A structure where each node has **at most** 2 children. Typical functions include insert, remove, search, and traverse. Auxiliary operations include find height of tree, find level of a node, find size of entire tree. Having at most 3 children would make a ternary tree; the term is just to describe the number of children of a tree.
     
 -   [**Binary Search Tree:**](https://www.geeksforgeeks.org/binary-search-tree-data-structure/?ref=shm) A structure where each parent has at most two children and all left nodes are smaller whilst all right nodes are greater. Binary Search Trees are not inherently self-balancing, (restructuring after each insertion/deletion to maintain a roughly equal level on both sides of the tree). An unbalanced tree could make operations go from O(log n) to O(n) as you’re effectively navigating your entire data set to get to the bottom of the tree.
 
@@ -141,13 +146,13 @@ This document is not finished and is actively being worked on. Structure and wor
   <i><a href=https://medium.com/basecs/trying-to-understand-tries-3ec6bede0014>Source: Trying to Understand Tries, Medium</a></i>
 </p>
 
--   [**Heap:**](https://www.geeksforgeeks.org/heap-data-structure/?ref=shm) A complete Binary Tree (all the levels are completely filled except possibly the lowest one, which is filled from the left.)
+-   [**Heap:**](https://www.geeksforgeeks.org/heap-data-structure/?ref=shm) A complete Binary Tree (all the levels are completely filled except possibly the lowest one, which is filled from the left). Can turn an unsorted array into a heap in O(n) because heapifying is different from outright sorting the list. It doesn’t need to enforce total ordering, just the heap property. The former (heap sort) takes O(nlogn). Can find the smallest/largest element in O(1). Can add/remove the smallest/largest element in O(log(n)). Can perform insertions and removals while always maintaining the first property.
 	-   Max-heap: Children are always smaller than their parents
 	-   Min-heap: Children are always larger than their parents
 
 	> [https://www.programiz.com/dsa/heap-data-structure](https://www.programiz.com/dsa/heap-data-structure)
 
-[Graph:](https://www.geeksforgeeks.org/graph-data-structure-and-algorithms)  Non-linear data structure consisting of vertices (nodes) and edges. It’s like a tree that doesn’t have to flow down, where each node can connect to any other node. Often, this results in cycles in the graph. A graph can also be directed, where the lines have arrows indicating some kind of order for the nodes. More on graphs in the “Algorithms” section.
+[**Graph:**](https://www.geeksforgeeks.org/graph-data-structure-and-algorithms)  Non-linear data structure consisting of vertices (nodes) and edges. It’s like a tree that doesn’t have to flow down, where each node can connect to any other node. Often, this results in cycles in the graph. A graph can also be directed, where the lines have arrows indicating some kind of order for the nodes. More on graphs in the “Algorithms” section.
 
 <p align="center">
   <img width="600" src="images/table_common_data_structure_operations.png">
@@ -168,6 +173,12 @@ This document is not finished and is actively being worked on. Structure and wor
 > exceptions (such as with Dijkstra’s) these algorithm implementations
 > shouldn’t be memorized. Rather, they should be reviewed to determine
 > underlying concepts and observations.
+
+> Remember to ask about the expected input size. Sometimes, the interviewer 
+> will be vague, but if they do give you a range, it can be a clue. 
+> For example, if n is very small, it is likely backtracking. If n is 
+> around 100 - 1000, an O( n^2 ) solution might be optimal. If n is 
+> very large then you might need to do better than O(n).
 
 > **[https://www.geeksforgeeks.org/fundamentals-of-algorithms/](https://www.geeksforgeeks.org/fundamentals-of-algorithms/)**
 
@@ -191,7 +202,9 @@ Generally, all basic data structures use O(n). 2D arrays and the like use O(n^2)
 
 ## CONCEPTS
 
-**Recursion:** Recursion is made for solving problems that can be broken down into smaller, repetitive problems. It is especially good for working on things that have many possible branches and are too complex for an iterative approach. Trees and graphs are common places for recursion to be implemented. Each recursive function consists of a recursive call (to itself) and a base case (causes us to exit recursion when we have the data we’re looking for). Recursive functions are heavy on memory use (each call is added to the stack), this can be lessened by using a look-up table (memoization).
+**Recursion:** Recursion is made for solving problems that can be broken down into smaller, repetitive problems. It is especially good for working on things that have many possible branches and are too complex for an iterative approach. Trees and graphs are common places for recursion to be implemented. Each recursive function consists of a recursive call (to itself) and a base case (causes us to exit recursion when we have the data we’re looking for). Recursive functions are heavy on memory use (each call is added to the stack), this can be lessened by using a look-up table (memoization). 
+-   **General steps:** What’s the simplest possible input? Play around with examples and visualize. Relate hard cases to simpler cases to find overlapping work. Generalize the pattern. Write code by combining the recursive pattern with the base case.
+
 
 **Memoization:** Technique for optimizing run-time. In cases where we call an expensive function multiple times with the same input, we can store the results of that function’s output and instead just look up that result on the next repeated call.
 
@@ -227,16 +240,30 @@ Take the recursive Fibonacci function above. Each call to fibo will make many mo
 
 ## UNCATEGORIZED ALGORITHMS
 
-**Sliding Window:** Used in array problems where you need to find some information about a *consecutive* sequence of data. Instead of a nested for loop to compare every index in an array to all indexes prior, we take a collection of indexes and slide down the array one by one. Each slide we remove the old index, add the new index, and compare the result to see if the new index is a better fit.
+**Sliding Window:** Used in array problems where you need to find some information about a *consecutive* sequence of data. Instead of a nested for loop to compare every index in an array to all indexes prior, we take a collection of indexes and slide down the array one by one. Each slide we remove the old index, add the new index, and compare the result to see if the new index is a better fit. Keywords that a problem is a Sliding Window problem are: maximum/minimum, subarray/substring.
 
-The algorithm is: get the value of the elements that fit in the window size at the start of the array, that is the current max. Iterate over the elements starting from the beginning. Calculate the value by subtracting the old element (first in the list) and adding the new element that is to the right of the currently calculated values. Compare the value to the current max. Repeat.
+The algorithm is: get the value of the elements that fit in the window size at the start of the array; that is the current max. Then, iterate over the elements starting from the beginning. Calculate the value by subtracting the old element (first in the list) and adding the new element that is to the right of the currently calculated values. Compare the value to the current max. Repeat.
+
+	def fn(arr):
+    left = ans = curr = 0
+
+    for right in range(len(arr)):
+        # do logic here to add arr[right] to curr
+
+        while WINDOW_CONDITION_BROKEN:
+            # remove arr[left] from curr
+            left += 1
+
+        # update ans
+    
+    return ans
 
 <p align="right">(<a href="#table-of-contents">back to top</a>)</p>
 
 ## PATTERN MATCHING
 
 > Find all occurrences of a given pattern in a given string.
-> There are many algorithms to accomplish this. Just keep one in your pocket.
+> Common algorithms are Boyer-Moore, KMP, Rabin Karp, and Z Algorithm. Just choose one and memorize it.
 
 **Boyer-Moore**
 
@@ -277,7 +304,7 @@ Divide and Conquer works by dividing a problem into smaller sub-problems, conque
     	return(d)
     }
 
-D & C includes Binary Search, Merge Sort, and Quick Sort
+**Examples are Binary Search, Merge Sort, and Quick Sort**
 
 > [https://www.geeksforgeeks.org/divide-and-conquer/?ref=shm](https://www.geeksforgeeks.org/divide-and-conquer/?ref=shm)
 
@@ -285,40 +312,22 @@ D & C includes Binary Search, Merge Sort, and Quick Sort
 
 ## DYNAMIC PROGRAMMING
 
-Dynamic programming works when we have an overlapping subproblems structure where the answer to a subproblem is needed for solving several other subproblems. We store the solutions to subproblems to save on calculation time when the same problem comes up again (memoization).
+Dynamic programming works when we have an overlapping subproblems structure where the answer to a subproblem is needed for solving several other subproblems. We store the solutions to subproblems to save on calculation time when the same problem comes up again (memoization). 
 
 Dynamic programming can be thought of as an extension of Divide and Conquer. Both look to solve problems that involve many subproblems, but a solution becomes dynamic programming when we use memoization/when the subproblems overlap.
+
+Hints that a problem may be DP include needing to find the maximum or minimum of something or having to make decisions that might look different depending on decisions we made previously.
+
+Solving and fully understanding a dynamic programming problem is a 4 step process:
+1. Start with the recursive backtracking solution
+2. Optimize by using a memoization table (top-down dynamic programming)
+3. Remove the need for recursion (bottom-up dynamic programming)
+4. Apply final tricks to reduce the time / memory complexity
 
 > [https://www.geeksforgeeks.org/dynamic-programming](https://www.geeksforgeeks.org/dynamic-programming)
 > [https://algorithm-visualizer.org/](https://algorithm-visualizer.org/)
 
-**Bellman-Ford’s Shortest Path**
-
-**Catalan Number**
-
-**Fibonacci Sequence**
-
-**Floyd-Warshall’s Shortest Path**
-
-**Integer Partition**
-
-**0/1 Knapsack Problem:** Given N items where each item has some weight and profit associated with it and also given a bag with capacity W, [i.e., the bag can hold at most W weight in it]. The task is to put the items into the bag such that the sum of profits associated with them is the maximum possible.  
-
-**Longest Common Subsequence**
-
-**Longest Increasing Subsequence**
-
-**Longest Palindromic Subsequence**
-
-**Maximum Subarray**
-
-**Maximum Sum Path**
-
-**Pascal’s Triangle**
-
-**Shortest Common Supersequence**
-
-**Ugly Numbers:** Ugly numbers are numbers whose only prime factors are 2, 3 or 5. Given a number n, the task is to find n’th Ugly number.
+**Examples are Bellman-Ford’s Shortest Path, Fibonacci Sequence, Floyd-Warshall’s Shortest Path, Integer Partition, 0/1 Knapsack Problem, Longest Common Subsequence, Longest Increasing Subsequence, Longest Palindromic Subsequence, Maximum Subarray, Maximum Sum Path, Pascal’s Triangle, Shortest Common Supersequence, Ugly Numbers**
 
 <p align="right">(<a href="#table-of-contents">back to top</a>)</p>
 
@@ -352,17 +361,12 @@ Technically, for backtracking problems:
 
 > [https://www.geeksforgeeks.org/backtracking-algorithms/](https://www.geeksforgeeks.org/backtracking-algorithms/)
 
-[**M-Coloring Problem:**](https://www.geeksforgeeks.org/m-coloring-problem/)  Given an undirected graph and a number m, the task is to color the given graph with at most m colors such that no two adjacent vertices of the graph are colored with the same color.
-
-We assign colors one by one starting from vertex 0. Before assigning a color we check a vertex’s already assigned neighbors to see if they have the same color or not. If no assignment of color is possible then we backtrack.
-  
-[**N-Queens Problem:**](https://www.geeksforgeeks.org/n-queen-problem-backtracking-3/)  The N Queen is the problem of placing N chess queens on an N×N chessboard so that no two queens attack each other.
-
-[**Permutations of given string:**](https://www.geeksforgeeks.org/write-a-c-program-to-print-all-permutations-of-a-given-string/) Print all permutations of a given string.
-
-[**Rat in a Maze:**](https://www.geeksforgeeks.org/rat-in-a-maze/) Given an N*N square matrix, we place a rat at some index and a finish line at some other index. The matrix acts as a game board. All indexes are marked either 0 or 1 indicating whether or not the rat can travel on that square. The rat can move up, down, left, and right. Return a path from the start to the finish.
-
-[**Sudoku:**](https://www.geeksforgeeks.org/sudoku-backtracking-7/)  Solve for Sudoku given a 9x9 matrix.
+**Examples are**
+[**M-Coloring Problem**](https://www.geeksforgeeks.org/m-coloring-problem/)**,** 
+[**N-Queens Problem**](https://www.geeksforgeeks.org/n-queen-problem-backtracking-3/)**,** 
+[**Permutations of given string**](https://www.geeksforgeeks.org/write-a-c-program-to-print-all-permutations-of-a-given-string/)**,** 
+[**Rat in a Maze**](https://www.geeksforgeeks.org/rat-in-a-maze/)**,** 
+[**Sudoku**](https://www.geeksforgeeks.org/sudoku-backtracking-7/)
 
 <p align="right">(<a href="#table-of-contents">back to top</a>)</p>
 
@@ -374,11 +378,12 @@ All Greedy algorithm implementations involve a list of resources (value, price, 
 
 > [https://www.geeksforgeeks.org/greedy-algorithms](https://www.geeksforgeeks.org/greedy-algorithms/?ref=shm)
 
-[**Dijkstra’s Shortest Path:**](http://geeksforgeeks.org/dijkstras-shortest-path-algorithm-greedy-algo-7/)  Memorize this algorithm. Given a weighted graph and a source vertex in the graph, find the shortest paths from the source to all the other vertices in the given graph. The input should be an adjacency matrix which tells you which vertices are connected, and the weight on the line connecting them.
+[**Dijkstra’s Shortest Path:**](http://geeksforgeeks.org/dijkstras-shortest-path-algorithm-greedy-algo-7/)  Memorize this algorithm. Given a weighted graph and a source vertex in the graph, find the shortest paths from the source to all the other vertices in the given graph. The input should be an adjacency list or matrix which tells you which vertices are connected, and the weight on the line connecting them.
 
-Keep a running list of all visited vertices and their distance values. While the list doesn’t include all vertices (signalling completion), pick an unvisited vertex with the smallest distance value (edge weight). Add that vertex to the list, and then visit all adjacent vertices to that vertex that have not already been visited. For each one, if the distance from the source to the adjacent vertex through the selected vertex is less than the current distance value for that adjacent vertex, update it in our list to the shorter path. Basically, if a shorter path exists through this new node that we chose, take it instead of whatever path we originally took.
+Keep a list of unvisited nodes and a running list of distance values (initialized to infinity). Pick the unvisited node with the smallest distance value (the starting node will be set to 0 and go first). Visit all adjacent nodes to that node that have not already been visited (are in the unvisited list). For each one, if the distance from the source to the adjacent node through the selected node is less than the current distance value for that adjacent node, update it in our list to the shorter path. Basically, if a shorter path exists through this new node that we chose, take it instead of whatever path we originally took.
+(Choose node with smallest path, update its neighbors, repeat)
 
-How this is done practically is that we keep two sets of vertices, one with visited nodes and one with corresponding distances. Set the starting node’s distance equal to 0. Visit the vertex that hasn’t already been visited with the smallest minimum distance value (sum of line weights from the source to the current node). The first node selected will be the source since we set it to 0. This vertex can be connected to any visited vertex in the graph. Add that vertex to the visited set. Then, iterate through all vertices. If a vertex is adjacent to the currently selected vertex and has not been visited already then we compare the distance already logged for that vertex to that of our selected vertex plus the distance to the adjacent node. If this new route is smaller, update the adjacent node in the distance list with the shorter distance value.
+How this is done practically is that we keep two sets of nodes, one with visited nodes and one with corresponding distances. Set the starting node’s distance equal to 0. Visit the vertex that hasn’t already been visited with the smallest minimum distance value (sum of line weights from the source to the current node). The first node selected will be the source since we set it to 0. This vertex can be connected to any visited vertex in the graph. Add that vertex to the visited set. Then, iterate through all vertices. If a vertex is adjacent to the currently selected vertex and has not been visited already then we compare the distance already logged for that vertex to that of our selected vertex plus the distance to the adjacent node. If this new route is smaller, update the adjacent node in the distance list with the shorter distance value.
 
 [**Fractional Knapsack problem:**](https://www.geeksforgeeks.org/fractional-knapsack-problem/)  Given the weights and values of N items, put these items in a knapsack of capacity W to get the maximum total value in the knapsack. In Fractional Knapsack, we can break items for maximizing the total value of the knapsack.
 
@@ -425,20 +430,39 @@ On the other hand, for Prim’s algorithm we keep a priority queue based on the 
 
 **Binary Search:** Only works on a sorted data set. Start by taking the midpoint of the array. If that’s the value you’re looking for, return it. Done in O(1). Otherwise, see if it’s higher or lower than the value you’re looking for. If it’s higher, repeat this process on the left half of the data set (everything that is less than the midpoint) excluding the midpoint. If it’s lower, repeat on the right half excluding the midpoint. After enough repeating of this process, you will have reduced the data set down so that the value you’re looking for becomes the midpoint, even if that means it’s the last value in the data set, with a runtime of O(log n) as you’ve only as you’ve shrunk the volume of data analyzed in each iteration.
 
+**Two Pointer Technique:** Used for searching pairs in a sorted array. 
+	def fn(arr):
+    left = ans = 0
+    right = len(arr) - 1
+
+    while left < right:
+        # do some logic here with left and right
+        if CONDITION:
+            left += 1
+        else:
+            right -= 1
+    
+    return ans
+Ex. Given a sorted array, find if there exists any pair of elements such that their sum is equal to X. We take two pointers, one representing the first element and other representing the last element of the array, and then we add the values kept at both the pointers. If their sum is smaller than X then we shift the left pointer to right or if their sum is greater than X then we shift the right pointer to left, in order to get closer to the sum. We keep moving the pointers until we get the sum as X.
+
 **Breadth-first Search:** A form of tree and graph traversal useful for searching for nodes in a tree. More useful than Depth-first Search when you’re looking for nodes that are close to the root. This commonly arises in the form of “find the shortest path to a node.” BFS also uses more memory but operates faster than DFS. Uses a queue data structure for traversal. Navigates everything on one level before going to the next.
--   [**Tree:**](https://www.geeksforgeeks.org/level-order-tree-traversal/)  Push all nodes on a lower level onto a queue. When a node is visited, remove it from the queue and add its children to the queue.
+-   [**Tree:**](https://www.geeksforgeeks.org/level-order-tree-traversal/)  Push all nodes on a lower level onto a queue. When a node is visited, remove it from the queue and add its children to the queue. (Level order)
+	> https://www.geeksforgeeks.org/get-level-of-a-node-in-a-binary-tree/ 
+
+	> https://www.geeksforgeeks.org/level-order-tree-traversal/ 
+
 -   [**Graph:**](https://www.geeksforgeeks.org/breadth-first-search-or-bfs-for-a-graph/) Graphs can be cyclical which results in visiting the same node twice. Therefore we need to use a queue to see what nodes need to be visited, and a set to mark each node as visited. Starting from the root, all the nodes at a particular level are visited first. We start by adding them to the queue and marking them as visited. We then pop them from the queue and add their children. Repeat the process until all the nodes are visited.  
+-   **Flood Fill:** A technique that uses BFS to find all reachable points, much like DFS. Used when DFS would encounter a stack overflow. In these cases a minimum path/cost is not needed.
 
-**Depth-first Search:** A form of tree and graph traversal useful for searching for nodes in a tree. More useful than Breadth-first Search when you’re looking for nodes that are far from the root. DFS also uses less memory but operates slower than BFS. Uses a stack data structure for traversal when used on a graph. Navigates one branch all the way down before moving onto the next.
--   **Tree:**
--   [**Graph:**](https://www.geeksforgeeks.org/depth-first-search-or-dfs-for-a-graph/?ref=lbp) Same logic as BFS but with a stack instead of a queue. Use a stack (list) to track what nodes need to be visited, and a set to mark the nodes as visited. Starting from a node, we mark it as visited and add its children to the stack. Pop the top element from the stack, mark it as visited, and add its children to the stack. Repeat the process until all the nodes are visited. Because it’s a stack, the most recently pushed children will be visited first, resulting in going as far as possible in a given direction. Other children of the root will be visited only after all children of the first child.
+**Depth-first Search:** A form of tree and graph traversal useful for searching for nodes in a tree. More useful than Breadth-first Search when you’re looking for nodes that are far from the root. DFS also uses less memory but operates slower than BFS. Uses a stack data structure for traversal when used on a graph. Navigates one branch all the way down before moving onto the next. DFS is just pre-order traversal.
+-   **Tree**
+-   [**Graph:**](https://www.geeksforgeeks.org/depth-first-search-or-dfs-for-a-graph/?ref=lbp) Same logic as BFS but with a stack instead of a queue. Use a stack (list) to track what nodes need to be visited, and a set to mark the nodes as visited. Starting from a node, we mark it as visited and add its children to the stack. Pop the top element from the stack, mark it as visited, and add its children to the stack. Repeat the process until all the nodes are visited. Because it’s a stack, the most recently pushed children will be visited first, resulting in going as far as possible in a given direction. Other children of the root will be visited only after all children of the first child. Alternatively (and better) is to use recursion.
 
-**BFS vs DFS:** Benefits heavily depend on the structure of the search tree and the number and location of solutions (aka searched-for items).
+**BFS vs DFS:** DFS is often preferred if we want to visit every node in the graph. If we want to find the shortest path (or just any path) between two nodes, BFS is generally better. However, it’s not always clear-cut. Benefits heavily depend on the structure of the search tree and the number and location of solutions (aka searched-for items). 
 -   If you know a solution is not far from the root of the tree, a breadth first search (BFS) might be better.
 -   If the tree is very deep and solutions are rare, depth first search (DFS) might take an extremely long time, but BFS could be faster.
--   If the tree is very wide, a BFS might need too much memory, so it might be completely impractical.
+-   If the tree is very wide, a BFS might need too much memory to work.
 -   If solutions are frequent but located deep in the tree, BFS could be impractical.
--   If the search tree is very deep you will need to restrict the search depth for depth first search (DFS), anyway (for example with iterative deepening).
 
 <p align="right">(<a href="#table-of-contents">back to top</a>)</p>
 
@@ -449,8 +473,11 @@ Quick Sort and Merge Sort are the most important.
 Generally, you won’t be asked to implement these sorts directly. Using a standard library sort and then discussing the pros and cons of these algorithms should generally suffice. You should, however, understand the ideas behind these algorithms in order to apply them to other problems.
 
 > [https://www.interviewkickstart.com/learn/sorting-algorithms](https://www.interviewkickstart.com/learn/sorting-algorithms)
+
 > [https://visualgo.net/en/sorting](https://visualgo.net/en/sorting)
+
 > [https://betterexplained.com/articles/sorting-algorithms/](https://betterexplained.com/articles/sorting-algorithms/)
+
 > [https://www.quora.com/What-are-the-most-common-sort-algorithms-in-a-tech-interview](https://www.quora.com/What-are-the-most-common-sort-algorithms-in-a-tech-interview)
 
 **Characteristics of Sorting Algorithms**
@@ -490,7 +517,9 @@ Generally, you won’t be asked to implement these sorts directly. Using a stand
 
 -   [**Merge Sort:**](https://www.geeksforgeeks.org/merge-sort/)  *Implement and explain it. Discuss time and space complexity.*
 
-	Divide and conquer. Divide the array of values in half. Continually divide the resulting arrays in half recursively until you are left with n arrays each containing 1 value. Merge all the values back together again in the correct order. The number of elements you need to compare is always N/2. Regardless of how many elements are combined, you’ll always have the same ratio of arrays, and elements within. The number of layers (iterations) to merge everything together is log(n) (amount of steps to go from 1 to N by a second power), so the result is O(n log n). Merge sort is a stable sort.
+	Divide and conquer. Divide the array of values in half. Continually divide the resulting arrays in half recursively until you are left with n arrays each containing 1 value. Merge all the values back together again in the correct order. Do this by iterating over both arrays-to-be-merged simultaneously and modifying the original array in-place. This requires a pointer for both the left, right, and original array. Look for the smaller of the two array index values, place it in the result array, and move that array’s pointer one to the right. 
+
+	The number of elements you need to compare is always N/2. Regardless of how many elements are combined, you’ll always have the same ratio of arrays, and elements within. The number of layers (iterations) to merge everything together is log(n) (amount of steps to go from 1 to N by a second power), so the result is O(n log n). Merge sort is a stable sort.
 
 	“Divide the array in half and keep doing that all the way until every element is on its own (which we skip). Then, moving up, iterate over the left and right halves, placing them in order in a new array. Make sure to fully iterate over both halves.”
 
@@ -566,7 +595,8 @@ If none of these work, we look at comparative sorts. Firstly, we ask: is the amo
 
 # OBJECT ORIENTED PROGRAMMING
 
-**Inheritance:** When a class derives its functions & data types from an existing class. Usually this means the subclass falls under the categorization of the superclass. Additional methods and variables can be added.
+**Inheritance:** When a class derives its functions & data types from an existing class.
+Usually this means the subclass falls under the categorization of the superclass. Additional methods and variables can be added. 
 
 (ex. Mammal -> Dog -> Corgi) (at the “dog” stage, we can add a “bark” method)
 
@@ -607,9 +637,9 @@ If none of these work, we look at comparative sorts. Firstly, we ask: is the amo
 
 **Abstraction:** A placeholder for a method or class that will be fully defined in a descendent class. Abstract classes and methods are completely blank.
 
--   abstract class: a restricted class that cannot be used to create objects (to access it, it must be inherited from another class).
+-   **Abstract class:** a restricted class that cannot be used to create objects (to access it, it must be inherited from another class).
 
--   abstract method: can only be used in an abstract class, and it does not have a body. The body is provided by the subclass (inherited from).
+-   **Abstract method:** can only be used in an abstract class, and it does not have a body. The body is provided by the subclass (inherited from).
 
 This is how interfaces are defined. All methods in an interface are abstract. An interface:
 -   has no instance variables.
@@ -777,9 +807,10 @@ In short: Index seek means access directly from the index. Table scan means iter
 
 # SYSTEM DESIGN
 
-> This section is almost entirely lifted from the repository listed below.
-
+> This section is almost entirely lifted from the following repository:
 > [https://github.com/donnemartin/system-design-primer](https://github.com/donnemartin/system-design-primer)
+
+> Some additional information has been pulled from [Grokking the Coding Interview](https://www.designgurus.io/course/grokking-the-system-design-interview)
 
 How to approach a system design interview question:
 
@@ -827,6 +858,18 @@ How to approach a system design interview question:
 		    
 		-   Database sharding
 
+**Alternate strategy:**
+-   Step 1: Gather functional (actual application functions) and non-functional requirements (operating standards such as reliability). Ask who, what, when, where, how. Include extended requirements such as metrics and API access.
+-   Step 2: Establish constraints and calculate estimates. Constraints would be limits on user input and estimates would be back-of-the-envelope calculations of storage and throughput. 
+	-   Make sure to get the read to write ratio. Divide by 31 days, 24 hours, 3600 seconds… based on the metric given to get to x per second. 
+	-   KB is a thousand bytes. MB is a million bytes. GB is a billion bytes. TB is a trillion bytes.
+	-   The 80-20 rule dictates that 20% of items generate 80% of traffic, so caches should be 20% of the total size needed
+-   Step 3: Write APIs
+-   Step 4: Database design
+-   Step 5: High level system architecture design
+-   Step 6: In depth component design
+-   Step 7: Identify bottlenecks
+
 **Back-of-the-envelope calculations:** You'll sometimes be asked to do 'back-of-the-envelope' estimates. For example, you might need to determine how long it will take to generate 100 image thumbnails from disk or how much memory a data structure will take. The Powers of two table and Latency numbers every programmer should know are handy references.
 
 -   Latency numbers every programmer should know:
@@ -870,18 +913,15 @@ Some things to notice:
     
 -   **Load balancing:** Ensures that one server doesn’t get overloaded while the rest stay idle. The “load” is the requests from users. It’s just another server that runs an algorithm such as round-robin or hashing to determine which server to send incoming requests to.
     
--   **Database replication**
+-   **Database replication:** Keeping copies of a database in case something happens to it. Improves availability.
     
--   **Database partitioning:** Dividing up data between servers based on some metric.
+-   **Database partitioning:** Dividing up data between servers based on some metric. Horizontal divides based on row, vertical based on column. Partitioning is a more generic term for dividing data across tables or databases. Sharding, seen later, is the process of storing data records across multiple machines using horizontal partitioning.
     
 -   **Server Clones:** Exact operational **replicas** of a current server. Every server contains exactly the same codebase and does not store any user-related data, like sessions, on local disc or memory. Any code changes can be deployed on a “main clone” and distributed to all other clones.
 
 	-   Storing Sessions: Sessions need to be stored in a centralized external (not on application servers) data store which is accessible to all your application servers. If you were to store sessions on these server clones, you’d have a different session on every server and need to keep logging in, keep re-adding items to your cart, etc. You can’t store everything in a cookie because that violates privacy and cookies are maxed out at too small of a size. But we could store a hash of the IP of a specific server in a cookie.
 	    
-	-   Server Backups: Now, if that data store goes down (a hard drive dies, power outage, etc.) we would lose all our functionality. We can resolve this in part by using RAID (Redundant Array of Independent Discs). RAID is a methodology by which your computer writes to your harddrive. There are many different types of RAID (RAID0, RAID1, RAID5 …, RAID10, etc.) that all one way or another allow for a “backup” should a harddrive die or go down. Basically in general if one resource in your server computer (hdd, powersupply, etc.) goes down, you have backups running and you can just hotswap out the faulty part.
-    
-
-	In the case of total failure (like a power outage), we can still solve this issue with replication. If a database dies, we have plenty of other slaves (in other locations) acting as backups.
+	-   Server Backups: Now, if that data store goes down (a hard drive dies, power outage, etc.) we would lose all our functionality. We can resolve this in part by using RAID (Redundant Array of Independent Discs). RAID is a methodology by which your computer writes to your harddrive. There are many different types of RAID (RAID0, RAID1, RAID5 …, RAID10, etc.) that all one way or another allow for a “backup” should a harddrive die or go down. Basically in general if one resource in your server computer (hdd, powersupply, etc.) goes down, you have backups running and you can just hotswap out the faulty part. In the case of total failure (like a power outage), we can still solve this issue with replication. If a database dies, we have plenty of other slaves (in other locations) acting as backups. 
 
 -   **Databases:** Complex queries can severely slow down runtimes. Avoid using Joins in your queries and instead handle it in your application code. Also, introduce a cache.
     
@@ -953,11 +993,19 @@ Some things to notice:
 
 **Load balancer:** As mentioned above, a load balancer is just a middle-man server between servers and client that determines which server to send the request to. The response from the selected server also goes through the load balancer before it passes it on to the client. Load balancers can be implemented via hardware (expensive) or software. To protect against failures, it's common to set up multiple load balancers, either in active-passive or active-active mode (see: Availability Patterns).
 
--   **Layer 4 load balancing**
+-   **Layer 4 load balancing:** Transport layer (TCP); forwards traffic based on ports, cannot route based on the contents of the data
     
--   **Layer 7 load balancing**
+-   **Layer 7 load balancing:** Application layer; traffic is routed by what is inside the HTTP protocol. Use this one. Can then do round robin, least ___, etc.
     
 -   **Horizontal scaling**
+-   **Types of load balancer selection algorithms:**
+	-   Least Connection Method — This method directs traffic to the server with the fewest active connections. This approach is quite useful when there are a large number of persistent client connections which are unevenly distributed between the servers.
+	-   Least Response Time Method — This algorithm directs traffic to the server with the fewest active connections and the lowest average response time.
+	-   Least Bandwidth Method - This method selects the server that is currently serving the least amount of traffic measured in megabits per second (Mbps).
+	-   Round Robin Method — This method cycles through a list of servers and sends each new request to the next server. When it reaches the end of the list, it starts over at the beginning. It is most useful when the servers are of equal specification and there are not many persistent connections.
+	-   Weighted Round Robin Method — The weighted round-robin scheduling is designed to better handle servers with different processing capacities. Each server is assigned a weight (an integer value that indicates the processing capacity). Servers with higher weights receive new connections before those with less weights and servers with higher weights get more connections than those with less weights.
+	-   IP Hash — Under this method, a hash of the IP address of the client is calculated to redirect the request to a server.
+
 
 **Reverse proxy (web server):** A middle-man server between servers and client.
 
@@ -977,7 +1025,7 @@ Some things to notice:
 	    
 	-   **Master-master replication:** Having two write servers instead of just one in case that one goes down. Both masters serve reads and writes and coordinate with each other on writes. If either master goes down, the system can continue to operate with both reads and writes. This requires a load balancer, increases complexity, and introduces potential inconsistency.
 	    
-	-   **Federation:** Federation (or functional partitioning) splits up databases by function. For example, instead of a single, monolithic database, you could have three databases: forums, users, and products, resulting in less read and write traffic to each database and therefore less replication lag. Smaller databases result in more data that can fit in memory, which in turn results in more cache hits due to improved cache locality. With no single central master serializing writes you can write in parallel, increasing throughput. Federation is not effective if your schema requires huge functions or tables.
+	-   **Federation:** Federation (or functional partitioning) splits up databases by function. For example, instead of a single, monolithic database, you could have three databases: forums, users, and products, resulting in less read and write traffic to each database and therefore less replication lag. Smaller databases result in more data that can fit in memory, which in turn results in more cache hits due to improved cache locality. With no single central master serializing writes, you can write in parallel, increasing throughput. Federation is not effective if your schema requires huge functions or tables. Correction: federation is the combining of databases (say, Azure and Oracle) virtually so that they appear as one. 
 	    
 	-   **Sharding:** Distributes data across different databases such that each database can only manage a subset of the data. Taking a users database as an example, as the number of users increases, more shards are added to the cluster. We could split these users into 2, 3 or more databases alphabetically based on their last name, for example. This makes SQL queries more difficult.
 	    
@@ -1017,16 +1065,19 @@ Some things to notice:
 -   **Caching at the database query level**
     
 -   **Caching at the object level**
-    
--   **When to update the cache**
 
+-   **Types of cache strategies (when to update the cache)**
 	-   **Cache-aside**
-	    
-	-   **Write-through**
-	    
-	-   **Write-behind (write-back)**
-	    
+	-   **Write-through:** Under this scheme, data is written into the cache and the corresponding database simultaneously. The cached data allows for fast retrieval and, since the same data gets written in the permanent storage, we will have complete data consistency between the cache and the storage. Also, this scheme ensures that nothing will get lost in case of a crash, power failure, or other system disruptions. Although, write-through minimizes the risk of data loss, since every write operation must be done twice before returning success to the client, this scheme has the disadvantage of higher latency for write operations.
+	-   **Write-behind (write-back):** Under this scheme, data is written to cache alone, and completion is immediately confirmed to the client. The write to the permanent storage is done after specified intervals or under certain conditions. This results in low-latency and high-throughput for write-intensive applications; however, this speed comes with the risk of data loss in case of a crash or other adverse event because the only copy of the written data is in the cache.
 	-   **Refresh-ahead**
+	-   **Read-through:** The application contacts the cache and if there’s a miss the cache retrieves from the database, updating itself and sending that info to the user. Good for when data retrieval is expensive and cache misses are infrequent. 
+	-   **Read-aside (lazy loading):** The application instead handles retrieving from the database if there’s a cache miss. It then sends that data to the cache before using it itself.
+
+-   **Cache replacement strategies:**
+	-   **Least Recently Used:** Discard the least recently used data.
+	-   **Least Frequently Used:** Discard the least frequently used data. The problem is when an object is repeatedly accessed for a short period of time and then never again. It becomes hard to remove.
+	-   **First in first out**
 
 **Asynchronism:** Helps reduce request times for expensive operations.
 
@@ -1070,6 +1121,60 @@ Some things to notice:
 
 **Basic Example Architecture:** We have a server connected to the internet (users). But we want to scale horizontally when we have too many users, so we add more servers. We need something to determine where to send traffic so one server doesn’t get overloaded, so we place a load balancer between the servers and the internet. A load balancer failure here can be a single point of failure so you want two in case one fails. Now when a user connects to our site, they’re only on one server. If the load balancer sends them to another server their session will be lost. So we keep session data in an external database. But only having one database causes a single point of failure if it shuts down. So we have multiple databases in a master-master type arrangement where each is a copy of one another and any changes propagate to the rest. Having a lot of servers each connected to all the databases is too complex, so we place another pair of load balancers between the servers and the databases. Now, let’s say the whole building loses power. Well, we’d have multiple server facilities in different geographic locations (USEAST1, USEAST2, etc.) where one can pick up the slack if another fails. Now with multiple buildings, each with multiple servers, we can implement load balancing at the DNS level, called global load balancing, which will direct internet traffic to one building’s load balancer IP, which will in turn direct traffic to a specific server in said building.
 
+**Stateless services:** When microservices don’t hold states in local memory or storage, so we could kill them unexpectedly or restart them anytime for any reason.
+
+**Large files:** If we’re transferring large amounts of data (such as in a large file), we can split the data into chunks to better handle it. We can then do a diff on any chunk changes and only update those specific chunks, saving bandwidth. We can also do data deduplication which involves searching for identical chunks in different files and deleting any copies. This should be done in real-time as data comes through. (Note: Metadata for files should be stored separately.)
+
+**API Gateway:** An API management tool that sits between a client and a collection of backend services. It acts as a reverse proxy to route requests, simplify the API, and aggregate the results from various services. It handles cross-cutting concerns like authentication, authorization, rate limiting, and logging. Commonly used in microservices architectures to provide a unified interface to a set of microservices, making it easier for clients to consume the services. Load balancers are focused on distributing traffic to prevent overloading servers and ensure high availability and redundancy. API Gateways are more about providing a central point for managing, securing, and routing API calls. You can use a Load Balancer and an API Gateway together in a system architecture, and they often complement each other in managing traffic and providing efficient service delivery. The typical arrangement is to place the Load Balancer in front of the API Gateway, but the actual setup can vary based on specific requirements and architecture decisions. The Load Balancer distributes incoming traffic across multiple instances of the API Gateway, ensuring that no single gateway instance becomes a bottleneck.
+
+**Server-side caching vs Client-side caching:** Server-side caching is more oriented towards database results while client-side is more for media files.
+
+**Consistent Hashing:** A means of distributing data across servers. Ensures that only a small set of keys move when servers are added or removed. Vnodes can further divide your data. 
+> https://www.designgurus.io/course-play/grokking-the-system-design-interview/doc/638c0b81ac93e7ae59a1b0f5 
+
+**Partition Strategy:** How we decide how data gets broken up and split across multiple DB nodes. We can hash a primary key to determine what node to place our data in and then hash a secondary key to determine what order the data goes in under that node. This is called a composite key. When partitioning data based on a key (e.g., user ID or order ID), if certain keys receive more requests than others, those partitions handling the "hot" keys can become overloaded while others remain underutilized. This is called a skewed load. A common solution is to add a random number after the ID so that it can be split across multiple partitions. This is more work for reads though, only do it in write-heavy scenarios. You could also apply a hash of a different key on the end instead of a random number which could help with reads. You could also have tiers of shards, with higher tiered users being given more space. 
+For choosing a partitioning key, we want to have a key with high variance for an even spread across shards, but we also want to make it so that a query only ever has to go to one shard to find what it needs, which is based on how your database is used with your application’s needs. We want to generally choose an ID, and then some important characteristics of our DB to make a composite key. (In a shop, normally orders are retrieved by customer ID or Order ID, not a UID such as a transaction ID. This is because the transaction ID is never used in a query.)
+
+**Basic Example Architecture:** We have a server connected to the internet (users). But we want to scale horizontally when we have too many users, so we add more servers. We need something to determine where to send traffic so one server doesn’t get overloaded, so we place a load balancer between the servers and the internet. A load balancer failure here can be a single point of failure so you want two in case one fails. Now when a user connects to our site, they’re only on one server. If the load balancer sends them to another server their session will be lost. So we keep session data in an external database. But only having one database causes a single point of failure if it shuts down. So we have multiple databases in a master-master type arrangement where each is a copy of one another and any changes propagate to the rest. Having a lot of servers each connected to all the databases is too complex, so we place another pair of load balancers between the servers and the databases. Now, let’s say the whole building loses power. Well, we’d have multiple server facilities in different geographic locations (USEAST1, USEAST2, etc.) where one can pick up the slack if another fails. Now with multiple buildings, each with multiple servers, we can implement load balancing at the DNS level, called global load balancing, which will direct internet traffic to one building’s load balancer IP, which will in turn direct traffic to a specific server in said building. 
+
+**Trade offs**
+-   **Consistency vs Availability:** How accurate the data is vs how often you’re able to get a response at all. Banking system vs social media like count for example.
+-   **Latency vs Throughput:** Response time vs amount of data in response.
+-   **Cache vs no cache:** Don’t cache data that is very dynamic (lots of writes will slow things down) or data that is rarely going to be fetched (waste of cache). Implement cache in a read heavy system, not a write heavy system. Look at what data is being most accessed to determine how much cache to use.
+-   **Cache and database strategies**
+-   **Cache replacement strategies**
+-   **Availability Patterns:** Pretty sure you should always choose active-active over active-passive.
+-   **Push vs Pull CDNs:** See definition.
+-   **Batch processing vs Stream processing:** batch processing handles data in large batches which can be more resource-efficient as the system can optimize for large data volumes. It’s not suitable for scenarios requiring real-time data processing and action, however. Stream processing involves continuously processing data in real-time as it arrives. It requires more resources but enables immediate insight and action.
+-   **Load Balancer strategies:** General recommendation is round robin. Or if certain servers are more powerful than others, weighted round robin. Other algorithms should be considered if you have extraordinary circumstances such as a lot of long-term connected users.
+-   **Load balancer vs reverse proxy:** A load balancer doubles as a reverse proxy, but is more expensive. Choose reverse proxy instead only if you have only one server and don’t plan on needing more.
+-   **Load Balancer vs API Gateway:** You should use both, it’s just a matter of what comes first. An API Gateway should only come before a load balancer (in the path from the user to the API logic) in the case where individual services require their own load balancing logic.
+-   **API Gateway vs Direct Service Exposure:** An API Gateway is a single entry point for all clients to access various services in a microservices architecture. It acts as a reverse proxy, routing requests from clients to the appropriate backend services. It simplifies management and authentication as there’s only one endpoint for the user. This can become a bottleneck however and adding an extra network hop can increase latency. In direct service exposure, each microservice or service is directly exposed to clients. Clients interact with each service through its own endpoint. Avoids the bottleneck of a central gateway and reduces latency but increases complexity otherwise. Functionality that would be handled by the API Gateway now has to be handled by each individual service.
+-   **SQL vs NoSQL vs Blob:**
+	-   **Data Structure:** SQL requires a predefined schema; NoSQL is more flexible. How rigid is our data?
+	-   **Scaling:** SQL scales vertically (requires more powerful hardware), while NoSQL scales horizontally (across many servers). 
+	-   **Complexity:** SQL can handle complex queries, while NoSQL is optimized for speed and simplicity of queries.
+	-   Use SQL when you need strong ACID compliance, and your data structure is predictable, consistent, and possibly involves a lot of relationships. Use NoSQL when you're dealing with massive volumes of data or need flexibility in the data model. Use blob storage for things like media files
+-   **Primary-Replica vs Peer-to-Peer Replication:** In Primary-Replica (also known as Master-Slave) replication, one server (the primary/master) handles all the write operations, and the changes are then replicated to one or more other servers (replicas/slaves). The primary handles writes, while replicas handle read queries, thereby distributing the load. Easier to maintain and ensure consistency and can scale read operations by adding more replicas. However, the primary replica is a single point of failure. In peer-to-peer, any node can replicate its data to any other node, and vice versa. Each peer maintains its copy of the data and can independently respond to read and write requests. Eliminates single points of failure and bottlenecks and spreads the load evenly across the network. However, this is much more complex to manage. This decision comes down to the application requirements for scalability and fault tolerance. Primary-Replica offers simplicity and read scalability, making it suitable for traditional database applications. In contrast, Peer-to-Peer provides robustness against failures and load distribution, ideal for decentralized networks.
+-   **Polling vs Long-Polling vs Webhooks:** Polling is where the client repeatedly requests a server at regular intervals. Long-polling is where the server holds the request open until new data is available to send back to the client. Webhooks are user-defined HTTP callbacks that are triggered by specific events. When the event occurs, the source site makes an HTTP request to the URL configured for the webhook. Normal interaction uses polling. Listening for updates/messages from the server uses long-polling. Constant back and forth uses webhooks.
+-   **CDN Usage vs Direct Server Serving:** Spreading out delivery locations vs everything handled by one main server. Only use direct server serving if you are on a small scale or with a localized audience.
+-   **Hybrid Cloud Storage vs All-Cloud Storage:** The amount of data that’s stored locally vs in the cloud. Storing data locally is more expensive and worse with scaling but is required for certain sensitive data.
+-   **Read-heavy vs Write-heavy:** Read-heavy systems benefit significantly from caching and data replication to reduce database read operations and latency. Write-heavy systems, on the other hand, require optimized database writes, effective data distribution, and asynchronous processing to handle high volumes of write operations efficiently. The choice of technologies and architecture patterns should align with the specific demands of the workload.
+
+**Downsides**
+-   **Load balancer:** Adds complexity, a very minimal latency, and cost
+-   **Indexing:** Drastically increases read performance but may itself be large due to the additional keys, which slow down data insertion & update. When inserting, we always have to update the index too. Use when you read more than write.
+
+**Single Points of Failure**
+-   **Rebalancing database partitions**
+
+**Back of the envelope:**
+1. Load estimation: Predict the expected number of requests per second, data volume, or user traffic for the system.
+2. Storage estimation: Estimate the amount of storage required to handle the data generated by the system.
+3. Bandwidth estimation: Determine the network bandwidth needed to support the expected traffic and data transfer.
+4. Latency estimation: Predict the response time and latency of the system based on its architecture and components.
+5. Resource estimation: Estimate the number of servers, CPUs, or memory required to handle the load and maintain desired performance levels.
+
 **Single point of failure:** Point where a single failure could take down the whole system.
 
 **Designing APIs:** Know best standards and practices as well as a library in your preferred language for designing APIs. All API calls must go to an endpoint of some sort. All responses should be JSON followed by a response code.
@@ -1087,26 +1192,38 @@ For testing APIs, we can use a software called Postman.
 -   **Test assertion:** checking to see if the test performed correctly
     
 -   **Integration Tests vs. Unit Tests:** Integration testing involves testing that components in your application operate with each other. For example a car’s fuel system may be tested in collaboration with an exhaust system. Unit testing is much smaller in scale. It involves the testing of individual components.
-```
-def  test_sum():
-	assert  sum([1,  2,  3])  ==  6,  "Should be 6"
+	```
+	def  test_sum():
+		assert  sum([1,  2,  3])  ==  6,  "Should be 6"
 
-if __name__ ==  "__main__":
-	test_sum()
-	print("Everything passed")
-```
+	if __name__ ==  "__main__":
+		test_sum()
+		print("Everything passed")
+	```
 
 -   **Test runner:** A special application designed for running tests, checking the output, and giving you tools for debugging and diagnosing tests and applications. The one built into the Python standard library is called unittest. All test files should start with test_ to provide context for test runners.
-```
-import  unittest
+	```
+	import  unittest
 
-class  TestSum(unittest.TestCase):
-	def  test_sum(self):
-		self.assertEqual(sum([1,  2,  3]),  6,  "Should be 6")
+	class  TestSum(unittest.TestCase):
+		def  test_sum(self):
+			self.assertEqual(sum([1,  2,  3]),  6,  "Should be 6")
 
-if __name__ ==  '__main__':
-	unittest.main()
-```
+	if __name__ ==  '__main__':
+		unittest.main()
+	```
+
+-   **Dependency Injection:** A dependency is something your class relies on in order to work. Dependency injection means injecting that dependency into your code from outside (i.e. defining it outside your class and inputting it as a parameter) as opposed to defining it inside your class (in a constructor or setter). Dependency injection is basically providing the objects that an object needs (its dependencies) instead of having it construct them itself. It's a very useful technique for testing, since it allows dependencies to be mocked or stubbed out. 
+	```
+	import unittest
+
+	class TestSum(unittest.TestCase):
+		def test_sum(self):
+			self.assertEqual(sum([1, 2, 3]), 6, "Should be 6")
+
+	if __name__ == '__main__':
+		unittest.main()
+	```
 
 [**Design Patterns:**](https://www.tutorialspoint.com/design_pattern/design_pattern_overview.htm)  Design patterns define best practices for defining objects that others will interact with. These practices are crucial to follow for writing organized, modular code. You’ll be asked about uses for the major patterns and how to implement them.
 
@@ -1120,6 +1237,23 @@ if __name__ ==  '__main__':
     
 -   **MVC:** Used for web frameworks.
     
+<p align="right">(<a href="#table-of-contents">back to top</a>)</p>
+
+# DESIGN PATTERNS
+
+[**Design Patterns:**](https://www.tutorialspoint.com/design_pattern/design_pattern_overview.htm) Design patterns are blueprints that contain best practices for defining objects that others will interact with.You’ll be asked about uses for the major patterns and how to implement them. Design patterns fall into three categories:
+-   **Creational:** Provide a way to create objects while hiding the creation logic, rather than instantiating objects directly using the new operator.
+-   **Structural:** Concern class and object composition. Concept of inheritance is used to compose interfaces and define ways to compose objects to obtain new functionalities.
+-   **Behavioral:** Specifically concerned with communication between objects.
+	> https://refactoring.guru/design-patterns/python
+
+The most commonly asked about design patterns are:
+-   [**Singleton:**](https://www.pentalog.com/blog/design-patterns/singleton-design-pattern/) Creational. Simplest and most important design pattern. A majority of questions will be about this. Singleton ensures that only one instance of the class exists in the entire program which can be useful when you need one central point of control (logging systems, thread pools, etc.). It does this by making the class constructor private (preventing instantiation), and defining a private static  instance of the class inside itself that’s accessible through a getter.
+-   [**Factory:**](https://www.tutorialspoint.com/design_pattern/factory_pattern.htm) Creational. We don’t expose any creation logic to the user. Instead, we use an interface that we define. So, instead of letting a user define a new instance of an object, we provide a Factory class to them in which we return said new object. This has the benefit of taking away responsibility from the user and allowing changes to classes without causing issues.
+-   **Adapter:** Structural. A single class which is responsible for joining functionalities of independent or incompatible interfaces.
+-   **Builder:** Creational. Builds a complex object using simple objects and using a step by step approach. Basically just a series of interfaces and abstract classes that all fit together in a nice package.
+-   **MVC (Model-View-Controller):** Used for web frameworks. Model stores data. View displays data. Controller handles the changing and updating of both.
+
 <p align="right">(<a href="#table-of-contents">back to top</a>)</p>
 
 
@@ -1186,8 +1320,42 @@ if __name__ ==  '__main__':
 | <<         | a << n  | Bitwise left shift         |
 | >>         | a >> n  | Bitwise right shift        |
 
+**Testing:** Unit testing is the isolation of an object to test while integration testing is making sure that everything works together cohesively.
+> https://stackoverflow.com/questions/3622455/what-is-the-purpose-of-mock-objects 
+
+**Dependency Injection:** Passing in whatever a class depends on via constructors or setters instead of creating a new instance inside the class
+
+[**CI & CD**](https://circleci.com/continuous-integration/#ci-vs-cd)
+
 <p align="right">(<a href="#table-of-contents">back to top</a>)</p>
 
+# INTERVIEW METHODOLOGY
+1. Read the problem. Reread the problem.
+2. Ask clarifying questions. Give more examples. Ask about basic, edge, and invalid cases.
+3. Write out test cases to ensure understanding: basic, edge, and invalid.
+4. State immediate assumptions about implementation and runtime.
+5. Take time to think of a solution.
+6. Talk through brute force solution.
+7. Talk through potential efficient solution.
+8. Draw out algorithm. Agree on solution.
+9. Implement solution with code.
+10. Calculate runtime.
+11. Run through basic, edge, and invalid test cases.
+12. Propose use cases for your class?
+
+**Test Cases**
+-   The extremes (minimum and maximum)
+-   Zero or One
+-   Negative numbers
+-   Numbers that make the denominator zero in division
+-   Arrays:
+	-   Empty array
+	-   Maximum sized array
+	-   If starting at something other than the first item, an array smaller than your starting position
+	-   A sorted array or reverse-sorted array
+	-   An array with duplicates
+	-   An array of all duplicates
+	-   An array containing a null
 
 # SOME ADDITIONAL LINKS
 
@@ -1215,7 +1383,45 @@ if __name__ ==  '__main__':
 
 [https://www.cs.cmu.edu/~adamchik/15-121/lectures/Sorting%20Algorithms/sorting.html](https://www.cs.cmu.edu/~adamchik/15-121/lectures/Sorting%20Algorithms/sorting.html)
 
+[https://www.topcoder.com/thrive/articles/How%20To%20Find%20a%20Solution](https://www.topcoder.com/thrive/articles/How%20To%20Find%20a%20Solution)
+
+[https://www.designgurus.io/blog/grokking-the-coding-interview-patterns](https://www.designgurus.io/blog/grokking-the-coding-interview-patterns)
+
+**Design Patterns**
+
+[https://refactoring.guru/design-patterns/python}(https://refactoring.guru/design-patterns/python)
+
 **Free Courses**
 
 [https://docs.google.com/spreadsheets/d/1BD8BJJUNaX63m2QmySWMGDp71nx4W4MyyiIBlfMoN3Q/htmlview](https://docs.google.com/spreadsheets/d/1BD8BJJUNaX63m2QmySWMGDp71nx4W4MyyiIBlfMoN3Q/htmlview)
 
+**LeetCode**
+[https://leetcode.com/explore/interview/card/cheatsheets/720/resources/](https://leetcode.com/explore/interview/card/cheatsheets/720/resources/)
+
+**Behavioral**
+[https://grow.google/certificates/interview-warmup/](https://grow.google/certificates/interview-warmup/)
+
+**Other**
+[https://techdevguide.withgoogle.com/paths/interview](https://techdevguide.withgoogle.com/paths/interview)
+
+**Most common coding pattern questions:**
+1. Sliding Window
+2. Islands (Matrix Traversal)
+3. Two Pointers
+4. Fast and slow pointers
+5. Cyclic Sort
+6. Merge Intervals
+7. In-place reversal of a linked list
+8. Breadth-first search
+9. Depth-first search
+10. Two heaps
+11. Subsets
+12. Modified binary search
+13. Bitwise XOR
+14. Top ‘K’ elements
+15. K-way merge
+16. Topological sort
+17. 0/1 Knapsack
+18. Fibonacci numbers
+19. Palindromic subsequence
+20. Longest common substring
