@@ -15,7 +15,7 @@
 		<a href="#algorithms">Algorithms</a>
 		<ul>
 			<li><a href="#complexity">Complexity</a></li>
-			<li><a href="#concepts">Concepts</a></li>
+			<li><a href="#algorithm-concepts">Algorithm Concepts</a></li>
 			<li><a href="#uncategorized-algorithms">Uncategorized Algorithms</a></li>
 			<li><a href="#pattern-matching">Pattern Matching</a></li>
 			<li><a href="#divide-&-conquer">Divide & Conquer</a></li>
@@ -200,7 +200,7 @@ Generally, all basic data structures use O(n). 2D arrays and the like use O(n^2)
 
 <p align="right">(<a href="#table-of-contents">back to top</a>)</p>
 
-## CONCEPTS
+## ALGORITHM CONCEPTS
 
 **Recursion:** Recursion is made for solving problems that can be broken down into smaller, repetitive problems. It is especially good for working on things that have many possible branches and are too complex for an iterative approach. Trees and graphs are common places for recursion to be implemented. Each recursive function consists of a recursive call (to itself) and a base case (causes us to exit recursion when we have the data we’re looking for). Recursive functions are heavy on memory use (each call is added to the stack), this can be lessened by using a look-up table (memoization). 
 -   **General steps:** What’s the simplest possible input? Play around with examples and visualize. Relate hard cases to simpler cases to find overlapping work. Generalize the pattern. Write code by combining the recursive pattern with the base case.
@@ -1326,6 +1326,11 @@ The most commonly asked about design patterns are:
 **Dependency Injection:** Passing in whatever a class depends on via constructors or setters instead of creating a new instance inside the class
 
 [**CI & CD**](https://circleci.com/continuous-integration/#ci-vs-cd)
+
+**Useful flowchart:**
+<p align="center">
+  <img src="images/flowchart.png">
+</p>
 
 <p align="right">(<a href="#table-of-contents">back to top</a>)</p>
 
